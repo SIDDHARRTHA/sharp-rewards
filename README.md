@@ -1,191 +1,193 @@
-📱 Sharp Rewards – Gamified Daily Challenge Rewards System
+# 📱 Sharp Rewards
 
-A full-stack rewards platform where users earn tokens by solving daily challenges.
-Includes Android app (Java) and Node.js + Express + MongoDB backend.
+A full-stack **gamified daily challenge rewards platform** built with **Android (Java)**, **Node.js**, **Express**, and **MongoDB**.
 
-🚀 Features
-🟦 Android App (Java + Retrofit)
+The app allows users to register/login, solve daily challenges, earn tokens, maintain streaks, compete on leaderboards (global & location-based), and redeem rewards using earned tokens.
 
-User Registration & Login
+---
 
-JWT-based authentication
+## 🚀 Features
 
-Daily challenge with answer submission
+### ✅ User Authentication
+- Register/Login using email
+- Password hashing with bcrypt
+- JWT-based authentication
+- Secure API access
+- Logout support
 
-Tokens & streak tracking
+### 🧠 Daily Challenge System
+- New challenge every day
+- Answer submission validation
+- Auto-reset using cron jobs
+- Streak tracking
 
-Global / Area / City / Country leaderboards
+### 🪙 Token & Rewards System
+- Earn tokens for correct answers
+- Streak-based incentives
+- Redeem rewards using tokens
+- Unique coupon generation
+- Instant database update after redemption
 
-Unlock & redeem rewards
+### 🏆 Leaderboard System
+- Today's leaderboard
+- Global leaderboard (all-time tokens)
+- Area-based leaderboard
+- City-based leaderboard
+- Country-based leaderboard
+- Real-time ranking updates
 
-Auto-update user tokens/streak locally
+### 📱 Android App UI
+- Clean & responsive UI
+- RecyclerView & Adapters
+- Local data sync using SharedPreferences
+- Retrofit + OkHttp + Gson integration
 
-Clean UI with RecyclerViews & Adapters
+---
 
-Uses Retrofit + Gson + OkHttp Logging
+## 🛠 Tech Stack
 
-🟩 Node.js Backend
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Android (Java) |
+| Networking | Retrofit2, OkHttp, Gson |
+| Backend | Node.js, Express.js |
+| Database | MongoDB + Mongoose |
+| Auth | JWT, bcrypt |
+| Scheduler | Cron Jobs |
+| Storage | SharedPreferences (Android) |
 
-User authentication (JWT + bcrypt)
+---
 
-Daily challenge generation & reset cron job
+## 📁 Project Structure
 
-Challenge submission logic
-
-Leaderboard:
-
-Today leaderboard
-
-Global leaderboard (all-time tokens)
-
-Area leaderboard
-
-City leaderboard
-
-Country leaderboard
-
-Rewards listing & redemption
-
-MongoDB (Mongoose models)
-
-CORS + dotenv configured
-
-🧱 Tech Stack
-🔹 Frontend (Android)
-
-Java (Android)
-
-Retrofit2 + OkHttp
-
-Gson
-
-RecyclerView / Adapter
-
-SharedPreferences
-
-🔹 Backend
-
-Node.js
-
-Express.js
-
-MongoDB + Mongoose
-
-Bcrypt
-
-JSON Web Token (JWT)
-
-Cron Scheduler
-
-📁 Project Structure
+```
 SharpRewards/
-│── backend/
-│   ├── controllers/
-│   ├── routes/
-│   ├── models/
-│   ├── cron/
-│   ├── server.js
+│
+├── backend/
+│   ├── controllers/          # Business logic
+│   ├── routes/               # API endpoints
+│   ├── models/               # MongoDB schemas
+│   ├── cron/                 # Daily reset jobs
+│   ├── server.js             # Backend entry point
 │   └── package.json
 │
-└── android-app/
-    ├── app/src/main/java/com/example/sharprewards/
-    ├── activities/
-    ├── adapters/
-    ├── models/
-    ├── api/
-    ├── AndroidManifest.xml
-    └── build.gradle
+├── android-app/
+│   ├── app/
+│   │   └── src/
+│   │       └── main/
+│   │           └── java/
+│   │               └── com/example/sharprewards/
+│   │                   ├── activities/
+│   │                   ├── adapters/
+│   │                   ├── models/
+│   │                   └── api/
+│   │
+│   ├── AndroidManifest.xml
+│   └── build.gradle
+│
+└── assets/
+    └── images/
+        ├── login.png
+        ├── signup.png
+        ├── dashboard.png
+        ├── leaderboard.png
+        ├── redeemvouncher.png
+        └── challenge.png
+```
 
-⚙️ Installation & Setup
-1️⃣ Clone the repository
-git clone https://github.com/YOUR_USERNAME/sharp-rewards.git
-cd sharp-rewards
+---
 
-2️⃣ Backend Setup
-Install dependencies:
-cd backend
-npm install
+## 🔐 Environment Variables
 
-Create .env file:
-JWT_SECRET=your_secret_here
+Create a `.env` file inside the `backend` folder:
+
+```env
+JWT_SECRET=your_jwt_secret_here
 MONGO_URI=mongodb://localhost:27017/sharprewards
+```
 
-Start backend:
+> **Note:** MongoDB can be local or cloud-based (MongoDB Atlas).
+
+---
+
+## 🧪 How It Works
+
+1. User registers and logs in via the Android app
+2. Backend generates a daily challenge
+3. User submits an answer
+4. If correct:
+   - Tokens are awarded
+   - Streak is updated
+5. Leaderboards update in real time
+6. User redeems rewards using tokens
+7. Daily challenge & leaderboard reset automatically via cron
+
+---
+
+## 📦 Installation
+
+### Backend Setup
+
+```bash
+git clone https://github.com/anuj23awasthisharp-rewards.git
+cd sharp-rewards/backend
+npm install
+```
+
+Create `.env` file and start server:
+
+```bash
 node server.js
+```
 
+Backend runs at: `http://192.168.X.X:5000`
 
-Backend Default URL → http://192.168.X.X:5000
+### Android App Setup
 
-3️⃣ Android App Setup
+1. Open **Android Studio**
+2. Select **Open Existing Project**
+3. Choose the `android-app` folder
+4. Update `RetrofitClient.java`:
 
-Inside Android Studio:
-
-Open the android-app directory
-
-Update RetrofitClient.java base URL:
-
+```java
 private static final String BASE_URL = "http://YOUR_LOCAL_IP:5000/";
+```
+
+5. Build and run the app on your device or emulator
 
 
-Run the app on a device/emulator connected to same WiFi.
+---
 
-🏆 Leaderboard Logic
-Global Leaderboard
 
-Sorted by:
+## ⚠️ Known Issues / To-Dos
 
-Total tokens earned (all-time)
+- Rate limiting for API abuse prevention
+- Push notifications for daily challenges
+- Admin panel for challenge management
+- Better reward recommendation logic
 
-Area / City / Country Leaderboards
+---
 
-Filters today’s leaderboard based on user’s location
+## 👨‍💻 Author
 
-Real-time updated
+Made with 💻 by **SIDDHARRTHA SHANKAR**  
 
-🎁 Rewards System
+---
 
-Users can redeem rewards with:
+## 📄 License
 
-Unique coupon codes
+This project is licensed under the **MIT License**.
 
-Token deduction
+---
 
-Immediate DB update
+## 🤝 Contributing
 
-🔐 Authentication Flow
+Contributions, issues, and feature requests are welcome!
 
-✔ Register → Save User → Login
-✔ JWT returned
-✔ Token saved in SharedPreferences
-✔ Sent in each secure request (optional upgrade)
+Feel free to check the [issues page](https://github.com/anuj23awasthi/sharp-rewards/issues).
 
-🌙 Cron Jobs
+---
 
-Daily reset of:
+## ⭐ Show Your Support
 
-Challenge question
-
-Leaderboard for the current day
-
-💻 Screenshots (Optional)
-
-Add screenshots of your app interface here.
-
-👨‍💻 Author
-
-Siddharrtha Shankar
-📍 India
-
-⭐ Contribute
-
-Fork
-
-Create branch
-
-Commit changes
-
-Create PR
-
-📝 License
-
-MIT License
+Give a ⭐️ if this project helped you!
